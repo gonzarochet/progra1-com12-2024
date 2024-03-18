@@ -8,10 +8,7 @@
 int main()
 {
   srand(time(NULL));
-    /* Ejercicio 1, 2 y 3 - Contar, sumar, promedio"
-
-
-
+    /// Ejercicio 1, 2 y 3 - Contar, sumar, promedio
 
     Pila dada, aux;
     inicpila(&dada);
@@ -43,11 +40,11 @@ int main()
 
     printf("La cantidad de elementos es %d, la sumatoria da %d, y el promedio es %.2f",contador,sumatoria,promedio);
 
-    */
 
 
 
-    /* Ejercicio 7 - 8. Determinar si un elemento existe en la pila. Mantener los elementos en el mismo orden"
+
+     Ejercicio 7 - 8. Determinar si un elemento existe en la pila. Mantener los elementos en el mismo orden"
 
     Pila dada, aux;
     inicpila(&dada);
@@ -95,10 +92,10 @@ int main()
     mostrar(&dada);
 
 
-    */
 
 
-    /* Ejercicio 4 - Encontrar el menor (solo pilas)
+
+     Ejercicio 4 - Encontrar el menor (solo pilas)
     Pila dada, aux, menor;
 
     inicpila(&dada);
@@ -130,7 +127,7 @@ int main()
 
     printf("El menor elemento de la pila dada es: %d", tope(&menor));
 
-    */
+
 
     /* Ejercicio 6 - Ordenación X Selección
 
