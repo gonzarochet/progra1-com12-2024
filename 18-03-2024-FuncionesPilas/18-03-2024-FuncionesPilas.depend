@@ -6,3 +6,9 @@
 	<stdio.h>
 	<malloc.h>
 
+1711058835 source:c:\dev\comision12-2024\18-03-2024-funcionespilas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"pila.h"
+
