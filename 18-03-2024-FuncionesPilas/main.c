@@ -148,7 +148,7 @@ void menu()
 
 
 /// 0. Funcion de Intercambio - Ejemplo powerpoint
-void intercambio ( int * a, int * b)
+iintercambio (int * a, int * b)
 {
     int aux;
 
@@ -289,7 +289,6 @@ void cargarPilaRandom(Pila *p)
         nro = rand()%10 +1;
         apilar(p,nro);
     }
-
 
 }
 

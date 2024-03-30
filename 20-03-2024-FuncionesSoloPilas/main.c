@@ -13,6 +13,8 @@ void pasarPilaPares(Pila * origen, Pila * destino);
 void pasarDatosMismoOrden(Pila * origen, Pila * destino);
 int buscaMenor (Pila * p);
 void ordenacionXSeleccion(Pila * origen, Pila * ordenada);
+void insertarPilaOrdenada(Pila * ordenada, int dato);
+void ordenacionXInsercion(Pila * desordenada, Pila * ordenada);
 
 
 
@@ -41,7 +43,8 @@ int main()
 
     //printf("El menor elemento de la pila era %d", menor);
 
-    ordenacionXSeleccion(&dada, &pilita);
+   // ordenacionXSeleccion(&dada, &pilita);
+    ordenacionXInsercion(&dada, &pilita);
 
     printf("\nLa pila dada despues de la ordenacion : \n");
     mostrar(&dada);
@@ -153,6 +156,8 @@ void pasarDatosMismoOrden(Pila * origen, Pila * destino){
 
 }
 
+
+
 int buscaMenor (Pila * p){
 
     Pila aux;
@@ -180,6 +185,8 @@ int buscaMenor (Pila * p){
 
 }
 
+
+
 void ordenacionXSeleccion(Pila * origen, Pila * ordenada){
 
     int valorMenor;
@@ -193,13 +200,27 @@ void ordenacionXSeleccion(Pila * origen, Pila * ordenada){
 
 
 
+void insertarPilaOrdenada(Pila * ordenada, int dato){
 
+    Pila aux;
+    inicpila(&aux);
 
+    while(!pilavacia(ordenada) && tope(ordenada) < dato){
+        apilar(&aux,desapilar(ordenada));
+    }
+    apilar(ordenada,dato);
 
+    pasarPila(&aux,ordenada);
 
+}
 
+void ordenacionXInsercion(Pila * desordenada, Pila * ordenada){
 
+    while(!pilavacia(desordenada)){
+        insertarPilaOrdenada(ordenada,desapilar(desordenada));
+    }
 
+}
 
 
 
@@ -280,3 +301,7 @@ int devuelveMayorPilaPorValor(Pila p)
     return mayor;
 
 }
+
+
+
+
