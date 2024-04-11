@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1712788140 source:c:\dev\comision12-2024\arreglostrings\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<conio.h>
+
