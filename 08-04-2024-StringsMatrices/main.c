@@ -21,8 +21,15 @@ int main()
     mostrarMatriz(filitas,columnitas,matrix);
     //float avg = promedio(filas,columnas,matrix);
 
+    int matriz[3][3] =
+    {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
 
-   // printf("El promedio es %.2f",avg);
+
+    // printf("El promedio es %.2f",avg);
 
 
 
@@ -70,5 +77,5 @@ float promedio(int filas,int columnas, int matrix[filas][columnas])
         }
 
     }
-        return (float)avg/(filas*columnas);
+    return (float)avg/(filas*columnas);
 }

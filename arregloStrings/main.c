@@ -4,14 +4,14 @@
 #include <ctype.h>
 #include <conio.h>
 
-int cargarArregloStrings1(int cantidadCaracteres, char arreglo[][cantidadCaracteres], int cantidadStrings);
-void mostrarArrayStrings(char arrayString[][20],int cantElem);
+int cargarArregloStrings1(int cantidadCaracteres, char arreglo[][cantidadCaracteres], int v, int cantidadStringsTotal);
+void mostrarArrayStrings(int cantCaracteres, char arrayString[][cantCaracteres],int cantElem);
 int findLowerPosition(char arrayString[][20],int cantElem,int posInit);
 
 int main()
 {
-    int cantStrings = 20; // cantidad de strings
-    int cantCaracteres = 100; // caracteres para cada string
+    int cantStrings = 5; // cantidad de strings
+    int cantCaracteres = 10; // caracteres para cada string
 
     char arrayOfStrings [cantStrings][cantCaracteres];
     int v = 0;
@@ -30,9 +30,9 @@ int main()
     */
 
 
-    v = cargarArregloStrings1(cantCaracteres,arrayOfStrings,cantStrings);
+    v = cargarArregloStrings1(cantCaracteres,arrayOfStrings,v,cantStrings);
     printf("el valor de v es %d",v);
-    mostrarArrayStrings(arrayOfStrings, v);
+    mostrarArrayStrings(cantCaracteres, arrayOfStrings, v);
 
 
 
@@ -40,16 +40,31 @@ int main()
     return 0;
 }
 
-int cargarArregloStrings1(int cantidadCaracteres, char arreglo[][cantidadCaracteres], int cantidadStrings) {
-    int i;
+int cargarArregloStrings1(int cantidadCaracteres, char arreglo[][cantidadCaracteres], int v, int cantidadStringsTotal)
+{
+    int i = v;
+    char option = 's';
     char temp[cantidadCaracteres];
 
-    for (i = 0; i < 5; i++) {
-        printf("Ingrese el string %d: ", i + 1);
-        fgets(temp, sizeof(temp), stdin);
-        // Eliminar el carácter de nueva línea al final de la entrada
-        //temp[strcspn(temp, "\n")] = 0;
-        strcpy(arreglo[i], temp);
+    while(v < cantidadStringsTotal && option != 27)
+    {
+        printf("Ingrese el string %d. Max %d caracteres: ",  i ,cantidadCaracteres);
+        gets(temp);
+
+        if(strlen(temp)< cantidadCaracteres){
+              strcpy(arreglo[i], temp);
+            i++;
+
+        }else{
+            printf("Ups. No se puede agregar por el tamanio");
+        }
+
+        printf("Desea continuar agregando datos?");
+        fflush(stdin);
+        option = getch();
+
+        system("cls");
+
     }
 
     return i;
@@ -84,7 +99,7 @@ int cargarArregloStrings(int cantStrings, int dimCaracteresStrings, char arreglo
 
 }
 
-void mostrarArrayStrings(char arrayString[][20],int cantElem)
+void mostrarArrayStrings(int cantCaracteres, char arrayString[][cantCaracteres],int cantElem)
 {
     for(int i = 0; i<cantElem; i++)
     {
@@ -122,26 +137,26 @@ void insertionSort(char arrayString[][20],int cantElem)
 
 
 */
-int findLowerPosition(char arrayString[][20],int cantElem,int posInit)
-{
-
-    int position = posInit;
-    char aux[20];
-
-    strcpy(aux,arrayString[position]);
-
-    for(int i = posInit + 1; i <cantElem; i++)
-    {
-        if(strcmp(arrayString[i],aux)<0)
-        {
-            strcpy(aux,arrayString[i]);
-            position = i;
-        }
-    }
-
-    return position;
-
-}
+//int findLowerPosition(char arrayString[][20],int cantElem,int posInit)
+//{
+//
+//    int position = posInit;
+//    char aux[20];
+//
+//    strcpy(aux,arrayString[position]);
+//
+//    for(int i = posInit + 1; i <cantElem; i++)
+//    {
+//        if(strcmp(arrayString[i],aux)<0)
+//        {
+//            strcpy(aux,arrayString[i]);
+//            position = i;
+//        }
+//    }
+//
+//    return position;
+//
+//}
 
 /*
 void selectionSort(char arrayString[][20],int cantElem)
