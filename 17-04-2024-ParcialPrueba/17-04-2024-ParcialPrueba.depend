@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1713400106 source:c:\dev\comision12-2024\17-04-2024-parcialprueba\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"pila.h"
+
+1679497902 source:c:\dev\comision12-2024\17-04-2024-parcialprueba\pila.c
+	"pila.h"
+
+1679420119 c:\dev\comision12-2024\17-04-2024-parcialprueba\pila.h
+	<stdio.h>
+	<malloc.h>
+
