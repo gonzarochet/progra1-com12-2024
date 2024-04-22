@@ -6,6 +6,7 @@
 void cargarMatriz(int filas, int columnas, int matrix[filas][columnas]);
 void mostrarMatriz(int filas, int columnas, int matrix[filas][columnas]);
 float promedio(int filas,int columnas, int matrix[filas][columnas]);
+int buscaElementoMatrices(int filas, int columnas, int m[filas][columnas], int dato);
 
 int main()
 {
@@ -20,6 +21,18 @@ int main()
     cargarMatriz(filitas,columnitas,matrix);
     mostrarMatriz(filitas,columnitas,matrix);
     //float avg = promedio(filas,columnas,matrix);
+
+    int valor = buscaElementoMatrices(filitas,columnitas,matrix,5);
+
+    if(valor)
+    {
+        printf("El valor se encuentra en la matriz");
+    }
+    else
+    {
+        printf("El valor  NO se encuentra en la matriz");
+    }
+
 
     int matriz[3][3] =
     {
@@ -79,3 +92,35 @@ float promedio(int filas,int columnas, int matrix[filas][columnas])
     }
     return (float)avg/(filas*columnas);
 }
+
+
+int buscaElementoMatrices(int filas, int columnas, int m[filas][columnas], int dato)
+{
+
+    int i = 0;
+    int j = 0;
+    int flag = 0;
+
+    while(i<filas && flag == 0)
+    {
+        j = 0;
+        while(j<columnas && flag == 0)
+        {
+            if(m[i][j] == dato)
+            {
+                flag = 1;
+            }
+            else
+            {
+                j++;
+            }
+        }
+        i++;
+    }
+
+    return flag;
+
+}
+
+
+

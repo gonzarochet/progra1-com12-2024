@@ -7,6 +7,11 @@
 int cargarArregloStrings1(int cantidadCaracteres, char arreglo[][cantidadCaracteres], int v, int cantidadStringsTotal);
 void mostrarArrayStrings(int cantCaracteres, char arrayString[][cantCaracteres],int cantElem);
 int findLowerPosition(char arrayString[][20],int cantElem,int posInit);
+int buscarPalabraArregloString(int d,  char as[][d], int v, char palabra[]);
+int buscarPalabraArregloStringPosicion(int d,  char as[][d], int v, char palabra[]);
+int buscarPalabraArregloStringBinaria(int d,  char as[][d], int v, char palabra[]);
+
+
 
 int main()
 {
@@ -34,8 +39,16 @@ int main()
     printf("el valor de v es %d",v);
     mostrarArrayStrings(cantCaracteres, arrayOfStrings, v);
 
+    int valor =  buscarPalabraArregloString(cantCaracteres,arrayOfStrings,v,"jorge");
 
-
+    if(valor)
+    {
+        printf("\n La palabra existe");
+    }
+    else
+    {
+        printf("\n La palabra no existe");
+    }
 
     return 0;
 }
@@ -48,14 +61,17 @@ int cargarArregloStrings1(int cantidadCaracteres, char arreglo[][cantidadCaracte
 
     while(v < cantidadStringsTotal && option != 27)
     {
-        printf("Ingrese el string %d. Max %d caracteres: ",  i ,cantidadCaracteres);
+        printf("Ingrese el string %d. Max %d caracteres: ",  i,cantidadCaracteres);
         gets(temp);
 
-        if(strlen(temp)< cantidadCaracteres){
-              strcpy(arreglo[i], temp);
+        if(strlen(temp)< cantidadCaracteres)
+        {
+            strcpy(arreglo[i], temp);
             i++;
 
-        }else{
+        }
+        else
+        {
             printf("Ups. No se puede agregar por el tamanio");
         }
 
@@ -108,6 +124,90 @@ void mostrarArrayStrings(int cantCaracteres, char arrayString[][cantCaracteres],
     }
     printf("\n----------------");
 }
+
+int buscarPalabraArregloString(int d,  char as[][d], int v, char palabra[])
+{
+
+    int flag = 0;
+    int i = 0;
+
+    while(i<v && flag == 0)
+    {
+        if(strcmpi(palabra,as[i]) == 0)
+        {
+            flag = 1;
+        }
+        else
+        {
+            i++;
+
+        }
+    }
+
+    return flag;
+
+}
+
+int buscarPalabraArregloStringPosicion(int d,  char as[][d], int v, char palabra[])
+{
+
+    int flag = 0;
+    int i = 0;
+    int posString = -1;
+
+
+    while(i<v && flag == 0)
+    {
+        if(strcmpi(palabra,as[i]) == 0)
+        {
+            flag = 1;
+            posString = i;
+        }
+        else
+        {
+            i++;
+
+        }
+    }
+
+    return posString;
+
+}
+
+
+int buscarPalabraArregloStringBinaria(int d,  char as[][d], int v, char palabra[])
+{
+
+    int inicio = 0;
+    int fin = v-1;
+    int posActual = 0;
+    int flag = 0;
+
+
+    while(inicio <= fin && flag == 0)
+    {
+        posActual = ((inicio + fin) / 2);
+
+        if(strcmp(palabra,as[posActual]) > 0 )
+        {
+            inicio = posActual +1 ;
+        }
+        else if( strcmp (palabra,as[posActual]) < 0)
+        {
+            fin = posActual - 1;
+        }
+        else
+        {
+            flag = 1;
+        }
+
+    }
+
+    return flag;
+}
+
+
+
 
 /*
 int insertOrder(char arrayString[][20],int cantElem,char stringToOrder[])
