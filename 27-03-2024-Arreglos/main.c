@@ -30,6 +30,45 @@ int main()
 
     srand(time(NULL));
 
+    char arreglo[100];
+
+    int a[7];
+    int b[3];
+
+    int c[10];
+
+    cargaRandomArregloVacio(a,7,7);
+
+    cargaRandomArregloVacio(b,3,3);
+
+    ordenacionSeleccion(a,7);
+    ordenacionSeleccion(b,3);
+
+    mostrarArreglo(a,7);
+    mostrarArreglo(b,3);
+
+    intercalarArreglos(a,7,b,3,c);
+
+    mostrarArreglo(c,10);
+
+
+
+
+//    for ( int i = 0; i < 100 ; i++){
+//           // int random =
+//            arreglo[i] = rand()% (91 + 64);
+//           // printf("%c \n", random);
+//    }
+//
+//    for ( int i = 0; i < 100 ; i++){
+//           // int random = rand()% (90 - 65) + 65;
+//            printf("%c \n", arreglo[i]);
+//
+//    }
+
+
+    system("pause");
+
     int arregloNotas[DIM];
     int validosNotas = 0;
 
@@ -175,10 +214,12 @@ void mostrarArreglo(int a[], int v)
 }
 
 /// 3. Suma elementos de un arreglo
-int sumaElementos(int arreglo[], int v){
+int sumaElementos(int arreglo[], int v)
+{
 
     int suma = 0;
-    for(int i = 0; i < v; i++){
+    for(int i = 0; i < v; i++)
+    {
         suma += arreglo[i];
     }
     return suma;
@@ -246,7 +287,7 @@ int esCapicua(int arreglo[], int v)
 
     return flag;
 }
- /// 10. Realizar una función que invierta los elementos de un arreglo.  (sin utilizar un arreglo auxiliar)
+/// 10. Realizar una función que invierta los elementos de un arreglo.  (sin utilizar un arreglo auxiliar)
 int invertirArreglo(int arreglo[], int v)
 {
     int inicio = 0;
@@ -375,6 +416,50 @@ void ordenacionInsercion(int arreglo[], int v)
     }
 }
 
+
+void intercalarArreglos(int a[],int vA, int b[], int vB, int c[])
+{
+
+    int iA = 0;
+    int iB = 0;
+    int iC = 0;
+
+
+    while(iA < vA && iB < vB)
+    {
+
+        if(a[iA]<= b[iB])
+        {
+            c[iC] = a[iA];
+            iA++;
+
+        }else{
+
+            c[iC] = b[iB];
+            iB++;
+
+        }
+
+         iC++;
+    }
+
+
+    while(iA < vA){
+        c[iC] = a[iA];
+        iA++;
+        iC++;
+    }
+
+    while(iB < vB){
+        c[iC] = b[iB];
+        iB++;
+        iC++;
+    }
+
+
+    return iC;
+
+}
 
 
 
