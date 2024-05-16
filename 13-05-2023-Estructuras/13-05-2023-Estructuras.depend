@@ -14,11 +14,30 @@
 
 1715638075 c:\dev\comision12-2024\13-05-2023-estructuras\direccion.h
 
-1715817203 source:c:\dev\comision12-2024\13-05-2023-estructuras\main.c
+1715896412 source:c:\dev\comision12-2024\13-05-2023-estructuras\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<conio.h>
 	"alumno.h"
 	<time.h>
+	"pilaAlumno.h"
+
+1715895697 source:c:\dev\comision12-2024\13-05-2023-estructuras\pila.c
+	"pila.h"
+
+1715818636 c:\dev\comision12-2024\13-05-2023-estructuras\pila.h
+	<stdio.h>
+	<malloc.h>
+
+1715896551 source:c:\dev\comision12-2024\13-05-2023-estructuras\pilaalumno.c
+	"pilaAlumno.h"
+
+1715896096 c:\dev\comision12-2024\13-05-2023-estructuras\pilaalumno.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<conio.h>
+	<time.h>
+	"alumno.h"
 

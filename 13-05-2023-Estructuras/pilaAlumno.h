@@ -1,7 +1,11 @@
 #ifndef PILAALUMNO_H_INCLUDED
 #define PILAALUMNO_H_INCLUDED
-
-#include "alumno.h
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <conio.h>
+#include <time.h>
+#include "alumno.h"
 
 typedef struct{
     stAlumno * a;

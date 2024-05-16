@@ -5,7 +5,7 @@ void inicpila(Pila * p)
 {
     int *aux;
     aux = (int *)malloc(50*sizeof(int));
-    p->valores = aux; // (*p).valores = aux;
+    p->valores = aux;// (*p).valores = aux;
     p->postope=0;
 }
 
