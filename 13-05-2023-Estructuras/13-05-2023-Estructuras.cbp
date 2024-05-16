@@ -31,9 +31,25 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="alumno.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="alumno.h" />
+		<Unit filename="direccion.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="direccion.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="pila.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="pila.h" />
+		<Unit filename="pilaAlumno.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="pilaAlumno.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
