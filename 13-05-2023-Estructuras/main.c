@@ -6,27 +6,37 @@
 #include <time.h>
 #include "pilaAlumno.h"
 
+void cargarAlumnosAlArchivo(char nombreArchivo[]);
+void mostrarDesdeElArchivo(char nombreArchivo[]);
+
+#define AR_ALUMNOS "alumnos.dat"
+
 
 int main()
 {
     srand(time(NULL));
-    stAlumno alumno, b , c;
 
-    PilaAlumnos pilita;
-    inicPilaAlumnos(&pilita);
+    cargarAlumnosAlArchivo(AR_ALUMNOS);
+    printf("\n\n<<<<<<<<<<<<<<< LISTADO DESDE EL ARCHIVO >>>>>>>>>>>><<<<<<<>>>><\n\n");
+    mostrarDesdeElArchivo(AR_ALUMNOS);
 
-    alumno = cargaRandomAlumno();
-    b = cargaRandomAlumno();
-    c = cargaRandomAlumno();
-
-
-    apilarPilaAlumnos(&pilita,alumno);
-    apilarPilaAlumnos(&pilita,b);
-    apilarPilaAlumnos(&pilita,c);
-
+//    stAlumno alumno, b , c;
+//
+//    PilaAlumnos pilita;
+//    inicPilaAlumnos(&pilita);
+//
+//    alumno = cargaRandomAlumno();
+//    b = cargaRandomAlumno();
+//    c = cargaRandomAlumno();
+//
+//
+//    apilarPilaAlumnos(&pilita,alumno);
+//    apilarPilaAlumnos(&pilita,b);
 //    apilarPilaAlumnos(&pilita,c);
-
-    mostrarPilaAlumnos(&pilita);
+//
+////    apilarPilaAlumnos(&pilita,c);
+//
+//    mostrarPilaAlumnos(&pilita);
 
 
     //printf("Quiero un numero random: %d", randomRango(20,50));
@@ -35,6 +45,59 @@ int main()
 
     return 0;
 }
+
+void cargarAlumnosAlArchivo(char nombreArchivo[]){
+
+    char opcion = 0;
+    stAlumno a;
+    int cant = 0;
+
+    FILE * archi = fopen(nombreArchivo,"wb");
+
+    if(archi != NULL) { /// if(archi)
+
+        do{
+            a = cargaRandomAlumno();
+            cant = fwrite(&a,sizeof(stAlumno),1,archi);
+            printf("\nFue escrito %d con exito\n",cant);
+
+            printf("Quiere seguir cargando datos al archivo? Esc para salir\n");
+            fflush(stdin);
+            opcion = getch();
+
+        }while(opcion != 27);
+
+        fclose(archi);
+    } else{
+        printf("No se pudo abrir");
+    }
+
+}
+
+
+void mostrarDesdeElArchivo(char nombreArchivo[]){
+
+    stAlumno a;
+
+    FILE * archi = fopen(nombreArchivo,"rb");
+
+    if(archi) {
+
+        while(fread(&a,sizeof(stAlumno),1,archi) > 0){
+            mostrarUnAlumno(a);
+        }
+
+        fclose(archi);
+    }else{
+
+       printf("No se pudo abrir");
+    }
+
+
+}
+
+
+
 
 
 
