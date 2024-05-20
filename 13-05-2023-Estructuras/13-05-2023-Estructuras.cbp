@@ -50,6 +50,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="pilaAlumno.h" />
+		<Unit filename="tpFinal.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

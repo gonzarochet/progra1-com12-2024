@@ -5,6 +5,7 @@
 #include "alumno.h"
 #include <time.h>
 #include "pilaAlumno.h"
+#include <windows.h>
 
 void cargarAlumnosAlArchivo(char nombreArchivo[]);
 void mostrarDesdeElArchivo(char nombreArchivo[]);
@@ -19,6 +20,7 @@ int main()
     cargarAlumnosAlArchivo(AR_ALUMNOS);
     printf("\n\n<<<<<<<<<<<<<<< LISTADO DESDE EL ARCHIVO >>>>>>>>>>>><<<<<<<>>>><\n\n");
     mostrarDesdeElArchivo(AR_ALUMNOS);
+
 
 //    stAlumno alumno, b , c;
 //
@@ -93,9 +95,12 @@ void mostrarDesdeElArchivo(char nombreArchivo[]){
        printf("No se pudo abrir");
     }
 
-
 }
 
+/// Del archivo al arreglo
+/// del arreglo al archivo
+/// busqueda de un alumno en un archivo
+/// cantidad de elementos en un archivo sin recorrerlo.
 
 
 
