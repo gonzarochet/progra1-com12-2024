@@ -37,20 +37,21 @@
 //    char pais[100];
 //} stDomicilio;
 //
+
 //typedef struct{
-//    int idUsuario;
+//    int idusuario;
 //    char email[100];
 //    char password[20];
 //    char username[20];
 //    int esAdmin;  /// 1 = si  0 = no
 //    char genero;
-//    char fechaNacimiento[20];  /// o se puede hacer con dia, mes, anio.
-//    int librosFavoritos[50]; /// se van a guardar los id de los libros favs.
+//    char fechanacimiento[20];  /// o se puede hacer con dia, mes, anio.
+//    int librosfavoritos[50]; /// se van a guardar los id de los libros favs.
 //    char dni[10];
-//    stDomicilio domicilio;
+//    stdomicilio domicilio;
 //    int eliminado; /// 0 si está activo - 1 si está eliminado
 //}stUsuario;
-//
+
 
 
 
