@@ -39,6 +39,8 @@ int main()
 
     return 0;
 }
+
+
 int * reservarDevolviendo(int *ptr, int num){
 	// La funcion declara que devuelve un puntero.
 
@@ -64,7 +66,7 @@ void reservar(int **ptr, int num){
 		printf("\nHe reservado en %p", *ptr);
 }
 
-void cargarArregloDinamicoRandom(int *ptr, int num){
+void cargarArregloDinamicoRandom(int * ptr, int num){
 	int i;
 
 	srand(time(NULL));
@@ -74,6 +76,7 @@ void cargarArregloDinamicoRandom(int *ptr, int num){
 
 }
 
+
 void imprimir(int *ptr, int num){
 	int i;
 
@@ -81,6 +84,8 @@ void imprimir(int *ptr, int num){
 	for (i = 0 ; i < num ; i++)
 		printf("%d ", ptr[i]);
 }
+
+
 
 void liberar(int **ptr){
 	free(*ptr);
