@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1717633216 source:c:\dev\comision12-2024\05-06-2024-archivosestructuras\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+
