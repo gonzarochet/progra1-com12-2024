@@ -1,6 +1,24 @@
 # depslib dependency file v1.0
-1717633216 source:c:\dev\comision12-2024\05-06-2024-archivosestructuras\main.c
+1717719638 source:c:\dev\comision12-2024\05-06-2024-archivosestructuras\main.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
+	"alumno.h"
+	"nota.h"
+
+1717710862 source:c:\dev\comision12-2024\05-06-2024-archivosestructuras\alumno.c
+	"alumno.h"
+
+1717710759 c:\dev\comision12-2024\05-06-2024-archivosestructuras\alumno.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+
+1717713848 c:\dev\comision12-2024\05-06-2024-archivosestructuras\nota.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+
+1717713847 source:c:\dev\comision12-2024\05-06-2024-archivosestructuras\nota.c
+	"nota.h"
 

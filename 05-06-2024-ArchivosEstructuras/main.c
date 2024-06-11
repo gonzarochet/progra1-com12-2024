@@ -1,79 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include "alumno.h"
+#include "nota.h"
 
 #define AR_ALUMNOS "alumnos.dat"
+#define AR_NOTA "notas.dat"
 
-typedef struct
-{
-    int legajo;
-    char nombreYapellido [30];
-    int edad;
-    int anio;
-//año que cursa, recordar que no podemos utilizar la ñ para definir variables
-} stAlumno;
 
-stAlumno crearUnAlumno();
-void mostrarUnAlumno(stAlumno a);
 int archivoToArregloAlumnos(char nombrearchivo[], stAlumno a[], int v, int dim);
+int archivoToArregloNotas(char nombreArchivoNotas[], stNota notas[],int vNotas,int dim);
 void muestraArregloAlumnos(stAlumno a[], int v);
+void muestraArregloNotas(stNota a[], int v);
 int cantElementosArchivoBis(char nombreArchivo[], int tamanio);
 void arregloAlArchivoAlumnos(stAlumno a[], int v, char nombreArchivo[]);
+void arregloAlArchivoNotas(stNota notas[],int vNotas,char nombreArchivoNotas[]);
 int buscaAlumnoPosicionLegajoEnArreglo(stAlumno a[], int v, int legajoAux);
 
 void subMenuModificarUsuario(stAlumno alumnos[],int vAlumnos);
+void subMenuAgregarNotasAUsuarios(stAlumno alumnos[], int vAlumnos, stNota notas[],int * vNotas);
+stAlumno subMenuCampoUsuarioAModificar(stAlumno anterior);
 
 int main()
 {
 
-    menu(AR_ALUMNOS);
+    menu(AR_ALUMNOS,AR_NOTA);
 
     return 0;
 }
 
-stAlumno crearUnAlumno()
-{
-    stAlumno a;
-    char aux[100];
-
-    printf("\n Ingrese el nombre:  \n");
-    fflush(stdin);
-    gets(a.nombreYapellido);
-
-    printf("Ingrese la edad \n");
-    scanf("%d",&a.edad);
-
-    printf("Ingrese el anio \n");
-    scanf("%d",&a.anio);
-
-    return a;
-
-}
-
-
-void mostrarUnAlumno(stAlumno a)
-{
-    printf("\n---------------------------------\n");
-    printf("Legajo:.................. %d \n",a.legajo);
-    printf("Nombre y Apellido:....... %s \n",a.nombreYapellido);
-    printf("Edad:.................. %d \n",a.edad);
-    printf("Anio:.................. %d \n",a.anio);
-    printf("\n--------------------------------------------\n");
-}
 
 void listadoOpciones()
 {
     printf("\n--------------------------------------------\n");
     printf("1. Crear un alumno.\n");
     printf("2. Mostrar listado de alumnos.\n");
-    printf("3. Modificar un alumno.\n");
-    printf("4. Guardar cambios en el archivo.\n");
-    printf("5. Guardar cambios y salir.\n");
+    printf("3. Modificar un alumno en el arreglo.\n");
+    printf("4. Modificar un alumno desde el archivo\n");
+    printf("5. Agregar una nota.\n");
+    printf("6. Mostrar listado de notas.\n");
+    printf("7. Guardar cambios en el archivo.\n");
+    printf("8. Salir.\n");
+
     printf("\n--------------------------------------------\n");
 }
 
 
-void menu(char nombreArchivoAlumnos[])
+void menu(char nombreArchivoAlumnos[], char nombreArchivoNotas[])
 {
     int option = 0;
     stAlumno aux;
@@ -82,8 +55,12 @@ void menu(char nombreArchivoAlumnos[])
     int vAlumnos = 0;
     static int idAlumno = 0;
 
+    stNota notas[100];
+    int vNotas = 0;
+
 
     vAlumnos = archivoToArregloAlumnos(nombreArchivoAlumnos,alumnos,vAlumnos,100);
+    vNotas = archivoToArregloNotas(nombreArchivoNotas,notas,vNotas,100);
 
     do
     {
@@ -115,7 +92,6 @@ void menu(char nombreArchivoAlumnos[])
 
             printf("Alumno creado correctamente. Recuerde Guardarlo en el archivo.");
 
-
             break;
 
         case 2:
@@ -124,16 +100,28 @@ void menu(char nombreArchivoAlumnos[])
             break;
         case 3:
             printf("\n 3. Modificar un alumno desde el Arreglo:  \n");
-
             subMenuModificarUsuario(alumnos,vAlumnos);
-
             break;
         case 4:
-            printf("4. Guardar cambios en el archivo.\n");
-            arregloAlArchivoAlumnos(alumnos,vAlumnos,nombreArchivoAlumnos);
+            printf(" 4. Modificar un alumno desde el Archivo \n");
+            subMenuModificarAlumnoDesdeArchivo(nombreArchivoAlumnos);
             break;
+
         case 5:
-            printf("5. Guardar cambios en el archivo y salir.\n");
+            printf("\n 5. Agregar Nota al Arreglo\n");
+            subMenuAgregarNotasAUsuarios(alumnos,vAlumnos,notas,&vNotas);
+            break;
+        case 6:
+            printf("\n 6. Listar notas desde el arreglo \n");
+            muestraArregloNotas(notas,vNotas);
+            break;
+        case 7:
+            printf("7. Guardar cambios en el archivo.\n");
+            arregloAlArchivoAlumnos(alumnos,vAlumnos,nombreArchivoAlumnos);
+            arregloAlArchivoNotas(notas,vNotas,nombreArchivoNotas);
+            break;
+        case 8:
+            printf("8. Salir.\n");
             break;
         default:
             printf("Opcion invalida. Ingrese nuevamente");
@@ -142,7 +130,7 @@ void menu(char nombreArchivoAlumnos[])
         getch();
         system("cls");
     }
-    while(option != 5);
+    while(option != 8);
 
 
 }
@@ -245,6 +233,28 @@ int archivoToArregloAlumnos(char nombrearchivo[], stAlumno a[], int v, int dim)
 
 }
 
+int archivoToArregloNotas(char nombreArchivoNotas[], stNota notas[],int vNotas,int dim)
+{
+
+    int cant = cantElementosArchivoBis(nombreArchivoNotas,sizeof(stNota));
+    int total = vNotas + cant;
+
+    FILE * archi = fopen(nombreArchivoNotas,"rb");
+
+    if(archi && total <= dim)
+    {
+        while(fread(&notas[vNotas],sizeof(stNota),1,archi) > 0)
+        {
+            vNotas++;
+        }
+        fclose(archi);
+    }
+
+    return vNotas;
+
+
+}
+
 void arregloAlArchivoAlumnos(stAlumno a[], int v, char nombreArchivo[])
 {
 
@@ -257,12 +267,33 @@ void arregloAlArchivoAlumnos(stAlumno a[], int v, char nombreArchivo[])
     }
 }
 
+void arregloAlArchivoNotas(stNota notas[],int vNotas,char nombreArchivoNotas[])
+{
+
+    FILE * archi = fopen(nombreArchivoNotas,"wb");
+
+    if(archi)
+    {
+        fwrite(notas,sizeof(stNota),vNotas,archi);
+        fclose(archi);
+    }
+
+}
+
 
 void muestraArregloAlumnos(stAlumno a[], int v)
 {
     for(int i = 0; i<v; i++)
     {
         mostrarUnAlumno(a[i]);
+    }
+}
+
+void muestraArregloNotas(stNota a[], int v)
+{
+    for(int i = 0; i<v; i++)
+    {
+        mostrarUnaNota(a[i]);
     }
 }
 
@@ -285,6 +316,186 @@ int buscaAlumnoPosicionLegajoEnArreglo(stAlumno a[], int v, int legajoAux)
 
     return pos;
 }
+
+
+/// Notas
+
+void subMenuAgregarNotasAUsuarios(stAlumno alumnos[], int vAlumnos, stNota notas[],int * vNotas)
+{
+
+    int legajoAlumno = -1 ;
+    int posAlumno = -1;
+
+    int validosNotas = *vNotas;
+
+    stAlumno alumnoAux;
+    stNota notaAux;
+
+    printf("\n Ingresa el legajo del alumno al cual queres agregarle una nota: ");
+    scanf("%d", &legajoAlumno);
+
+    posAlumno = buscaAlumnoPosicionLegajoEnArreglo(alumnos,vAlumnos,legajoAlumno);
+
+    if(posAlumno > -1 )
+    {
+
+        alumnoAux = alumnos[posAlumno];
+        notaAux = crearUnaNota();
+        notaAux.legajoAlumno = alumnoAux.legajo;
+
+        if(vNotas > 0)
+        {
+            notaAux.idNota = validosNotas;
+        }
+        else
+        {
+            notaAux.idNota = 0;
+
+        }
+
+        notas[validosNotas] = notaAux;
+        validosNotas++;
+
+        *vNotas = validosNotas;
+
+        printf("\n Se agrego una nota al arreglo. Acuerse de guardar los cambios en el archivo. \n");
+
+    }
+    else
+    {
+        printf("\n No se encontro el alumno con ese legajo. Intente con otro legajo. \n");
+
+    }
+}
+
+
+int buscarAlumnoEnArchivoPorLegajo(char nombreArchivoAlumnos[], int legajo)
+{
+
+    int pos = -1;
+    int i = 0;
+    stAlumno a;
+
+    FILE * archi = fopen(nombreArchivoAlumnos,"rb");
+
+    if(archi)
+    {
+        while(pos == -1 && fread(&a,sizeof(stAlumno),1,archi) > 0)
+        {
+            if(a.legajo == legajo)
+            {
+                pos = i;
+            }
+            i++;
+        }
+        fclose(archi);
+    }
+
+    return pos;
+
+}
+
+
+void modificarAlumnoEnArchivo(char nombreArchivoAlumnos[], int pos)
+{
+
+    FILE * archi = fopen(nombreArchivoAlumnos,"r+b");
+        // me permite retroceder al momento de la escritura.
+        // No sucede eso con a+b que siempre escribe al final.
+    stAlumno aux;
+
+    if(archi)
+    {
+        fseek(archi,0,SEEK_SET);
+        fseek(archi,sizeof(stAlumno)* pos, SEEK_CUR);
+        fread(&aux,sizeof(stAlumno),1,archi);
+
+        aux = subMenuCampoUsuarioAModificar(aux);
+
+        fseek(archi,  (-1) * sizeof(stAlumno), SEEK_CUR);
+
+        fwrite(&aux,sizeof(stAlumno),1,archi);
+
+        fclose(archi);
+    }else{
+        printf("No se abrio correctamente\n");
+    }
+
+}
+
+
+
+
+void subMenuModificarAlumnoDesdeArchivo(char nombreArchivoAlumnos[])
+{
+
+    int legajoAlumno;
+    int posEnArchi = -1;
+    int opcion2 = 0;
+    stAlumno nuevo;
+
+    printf("\n Ingrese el legajo del usuario a modificar \n ");
+    scanf("%d",&legajoAlumno);
+
+    posEnArchi = buscarAlumnoEnArchivoPorLegajo(nombreArchivoAlumnos,legajoAlumno);
+
+
+    if(posEnArchi > - 1)
+    {
+        modificarAlumnoEnArchivo(nombreArchivoAlumnos,posEnArchi);
+    }
+    else
+    {
+
+        printf("\n No existe alumno con ese legajo");
+    }
+
+}
+
+stAlumno subMenuCampoUsuarioAModificar(stAlumno anterior)
+{
+
+    int option2 = 0;
+
+    printf("Cual campo queres modificar?\n");
+    printf("1. Nombre y Apellido\n");
+    printf("2. Anio \n");
+    printf("3. Cancelar");
+
+    scanf("%d",&option2);
+
+    switch(option2)
+    {
+
+    case 1:
+        printf("Ingrese el nuevo nombre y Apellido\n");
+        fflush(stdin);
+        gets(anterior.nombreYapellido);
+        printf("Se modifico correctamente \n");
+        break;
+
+    case 2:
+        printf("Ingrese el nuevo Anio \n");
+        gets(anterior.anio);
+        printf("Se modifico correctamente\n");
+        break;
+    case 3:
+        break;
+    default:
+        printf("No existe esa opción \n");
+    }
+
+    return anterior;
+
+}
+
+
+
+
+
+
+
+
 
 
 
