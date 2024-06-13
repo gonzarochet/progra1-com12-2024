@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1718236409 source:c:\dev\comision12-2024\pre-parcial-2\main.c
+	<stdio.h>
+	<stdlib.h>
+	"conio.h"
+
